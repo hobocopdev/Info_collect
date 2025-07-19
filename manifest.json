@@ -1,0 +1,20 @@
+
+{
+  "manifest_version": 3,
+  "name": "Candidate Info Collector",
+  "version": "1.1",
+  "description": "右键收集信息并静态展示",
+  "permissions": ["contextMenus", "storage", "scripting", "activeTab"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ],
+  "action": {
+    "default_title": "Candidate Info Collector"
+  }
+}
