@@ -1,17 +1,10 @@
 
-chrome.runtime.onInstalled.addListener(() => {
-  chrome.contextMenus.create({
-    id: "collectInfo",
-    title: "📋 收集应聘者信息",
-    contexts: ["all"]
-  });
-});
-
-chrome.contextMenus.onClicked.addListener((info, tab) => {
-  if (info.menuItemId === "collectInfo") {
-    chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      files: ["content.js"]
+chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
+  if (msg.action === "openTabs") {
+    msg.urls.forEach((url, i) => {
+      setTimeout(() => {
+        chrome.tabs.create({ url: url, active: false });
+      }, i * 1000);
     });
   }
 });
